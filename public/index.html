@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JokkerShop Nx - Free Fire Accounts</title>
+    <style>
+        @font-face {
+            font-family: 'Gagalin';
+            src: url('/media/gagalin.otf') format('opentype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Gagalin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff4757 0%, #ffa502 50%, #ff6348 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff4757;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff4757;
+        }
+
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .account-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .account-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .account-image-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .account-image {
+            width: 100%;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .slider-btn.prev {
+            left: 10px;
+        }
+
+        .slider-btn.next {
+            right: 10px;
+        }
+
+        .account-card:hover .account-image {
+            transform: scale(1.05);
+        }
+
+        .account-info {
+            padding: 25px;
+        }
+
+        .account-caption {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .account-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4757;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .no-accounts {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .no-accounts-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .accounts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/IMG-20250803-WA0010.jpg" alt="JokkerShop Nx" class="logo-img">
+                    JokkerShop Nx
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title" style="color: black;">Premium Free Fire Accounts</h1>
+            <p class="page-subtitle">Discover amazing Free Fire accounts with exclusive skins and items</p>
+
+            <div id="accounts-container">
+                <!-- Posts will be loaded here dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 JokkerShop Nx. Premium Free Fire Accounts Marketplace.</p>
+            <p><a href="https.chat.whatsapp.com/Kt9Axe8PVL8GGK1YkH5Y8j?mode=ac_t" style="color: green; text-decoration: none;">Join our WhatsApp Group</a></p>
+        </div>
+    </footer>
+
+    <div id="image-modal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accountsContainer = document.getElementById('accounts-container');
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeBtn = document.querySelector('.close-btn');
+
+            const openModal = (src) => {
+                modal.style.display = 'block';
+                modalImage.src = src;
+            };
+
+            const closeModal = () => {
+                modal.style.display = 'none';
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            fetch('/api/posts')
+                .then(response => response.json())
+                .then(posts => {
+                    console.log(posts);
+                    if (posts && posts.length > 0) {
+                        const grid = document.createElement('div');
+                        grid.className = 'accounts-grid';
+
+                        posts.forEach(post => {
+                            const card = document.createElement('div');
+                            card.className = 'account-card';
+
+                            const slider = document.createElement('div');
+                            slider.className = 'account-image-slider';
+
+                            const sliderTrack = document.createElement('div');
+                            sliderTrack.className = 'slider-track';
+                            slider.appendChild(sliderTrack);
+
+                            if (post.images && post.images.length > 0) {
+                                post.images.forEach((imageUrl, index) => {
+                                    const image = document.createElement('img');
+                                    image.src = imageUrl;
+                                    image.alt = post.caption;
+                                    image.className = 'account-image';
+                                    image.addEventListener('click', () => {
+                                        openModal(imageUrl);
+                                    });
+                                    sliderTrack.appendChild(image);
+                                });
+
+                                if (post.images.length > 1) {
+                                    const prevBtn = document.createElement('button');
+                                    prevBtn.className = 'slider-btn prev';
+                                    prevBtn.innerHTML = '&lt;';
+                                    slider.appendChild(prevBtn);
+
+                                    const nextBtn = document.createElement('button');
+                                    nextBtn.className = 'slider-btn next';
+                                    nextBtn.innerHTML = '&gt;';
+                                    slider.appendChild(nextBtn);
+
+                                    let currentImageIndex = 0;
+                                    const imageCount = post.images.length;
+
+                                    const updateSliderPosition = () => {
+                                        sliderTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+                                    };
+
+                                    prevBtn.addEventListener('click', (e) => {
+                                        e.stopPropagation();
+                                        currentImageIndex = (currentImageIndex - 1 + imageCount) % imageCount;
+                                        updateSliderPosition();
+                                    });
+
+                                    nextBtn.addEventListener('click', (e) => {
+                                        e.stopPropagation();
+                                        currentImageIndex = (currentImageIndex + 1) % imageCount;
+                                        updateSliderPosition();
+                                    });
+                                }
+                            } else if (post.image) { // Fallback for older posts with single image
+                                const image = document.createElement('img');
+                                image.src = post.image;
+                                image.alt = post.caption;
+                                image.className = 'account-image';
+                                image.addEventListener('click', () => {
+                                    openModal(post.image);
+                                });
+                                sliderTrack.appendChild(image);
+                            }
+
+                            const info = document.createElement('div');
+                            info.className = 'account-info';
+
+                            const caption = document.createElement('h3');
+                            caption.className = 'account-caption';
+                            caption.textContent = post.caption;
+
+                            const price = document.createElement('div');
+                            price.className = 'account-price';
+                            price.innerHTML = `<span class="price-label">Price:</span> ${post.price.toFixed(2)}`;
+
+                            info.appendChild(caption);
+                            info.appendChild(price);
+                            card.appendChild(slider);
+                            card.appendChild(info);
+                            grid.appendChild(card);
+                        });
+
+                        accountsContainer.appendChild(grid);
+                    } else {
+                        const noAccounts = document.createElement('div');
+                        noAccounts.className = 'no-accounts';
+                        noAccounts.innerHTML = `
+                            <div class="no-accounts-icon">🎯</div>
+                            <h2>No accounts available yet</h2>
+                            <p>Check back soon for amazing Free Fire accounts!</p>
+                        `;
+                        accountsContainer.appendChild(noAccounts);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching posts:', error);
+                    const errorElement = document.createElement('div');
+                    errorElement.className = 'no-accounts';
+                    errorElement.innerHTML = '<h2>Error loading accounts. Please try again later.</h2>';
+                    accountsContainer.appendChild(errorElement);
+                });
+        });
+    </script>
+</body>
+</html>
