@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JokkerShop Nx - Free Fire Accounts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'Gagalin';
+            src: url('/media/gagalin.otf') format('opentype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Gagalin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            margin: 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff4757;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff4757;
+        }
+
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .account-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .account-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .account-image-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .account-image {
+            width: 100%;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .slider-btn.prev {
+            left: 10px;
+        }
+
+        .slider-btn.next {
+            right: 10px;
+        }
+
+        .account-card:hover .account-image {
+            transform: scale(1.05);
+        }
+
+        .account-info {
+            padding: 25px;
+        }
+
+        .account-caption {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .account-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4757;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .account-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .stat i {
+            color: #ff4757;
+        }
+
+        .like-btn {
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .like-btn:hover {
+            color: #ff4757;
+        }
+
+        .buy-btn {
+            display: block;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background-color: #218838;
+        }
+
+        .comment-section {
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            display: none;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .comment-form button {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .comment-list {
+            margin-top: 20px;
+        }
+
+        .comment {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comment p {
+            margin: 0;
+        }
+
+        .comment .meta {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .no-accounts {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .no-accounts-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #ff4757;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 50px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .accounts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/IMG-20250803-WA0010.jpg" alt="JokkerShop Nx" class="logo-img">
+                    JokkerShop Nx
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Premium Free Fire Accounts</h1>
+            <p class="page-subtitle">Discover amazing Free Fire accounts with exclusive skins and items</p>
+
+            <div id="accounts-container">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 JokkerShop Nx. Premium Free Fire Accounts Marketplace.</p>
+            <p><a href="https.chat.whatsapp.com/Kt9Axe8PVL8GGK1YkH5Y8j?mode=ac_t" style="color: green; text-decoration: none;">Join our WhatsApp Group</a></p>
+        </div>
+    </footer>
+
+    <div id="image-modal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accountsContainer = document.getElementById('accounts-container');
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeBtn = document.querySelector('.close-btn');
+            const loader = document.querySelector('.loader');
+
+            const openModal = (src) => {
+                modal.style.display = 'block';
+                modalImage.src = src;
+            };
+
+            const closeModal = () => {
+                modal.style.display = 'none';
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+
+            fetch('/api/posts')
+                .then(response => response.json())
+                .then(posts => {
+                    if(loader) {
+                        loader.remove();
+                    }
+                    console.log(posts);
+                    if (posts && posts.length > 0) {
+                        const grid = document.createElement('div');
+                        grid.className = 'accounts-grid';
+
+                        posts.forEach(post => {
+                            const card = document.createElement('div');
+                            card.className = 'account-card';
+
+                            const slider = document.createElement('div');
+                            slider.className = 'account-image-slider';
+
+                            const sliderTrack = document.createElement('div');
+                            sliderTrack.className = 'slider-track';
+                            slider.appendChild(sliderTrack);
+
+                            if (post.images && post.images.length > 0) {
+                                post.images.forEach((imageUrl, index) => {
+                                    const image = document.createElement('img');
+                                    image.src = imageUrl;
+                                    image.alt = post.caption;
+                                    image.className = 'account-image';
+                                    image.addEventListener('click', () => {
+                                        openModal(imageUrl);
+                                    });
+                                    sliderTrack.appendChild(image);
+                                });
+
+                                if (post.images.length > 1) {
+                                    const prevBtn = document.createElement('button');
+                                    prevBtn.className = 'slider-btn prev';
+                                    prevBtn.innerHTML = '&lt;';
+                                    slider.appendChild(prevBtn);
+
+                                    const nextBtn = document.createElement('button');
+                                    nextBtn.className = 'slider-btn next';
+                                    nextBtn.innerHTML = '&gt;';
+                                    slider.appendChild(nextBtn);
+
+                                    let currentImageIndex = 0;
+                                    const imageCount = post.images.length;
+
+                                    const updateSliderPosition = () => {
+                                        sliderTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+                                    };
+
+                                    prevBtn.addEventListener('click', (e) => {
+                                        e.stopPropagation();
+                                        currentImageIndex = (currentImageIndex - 1 + imageCount) % imageCount;
+                                        updateSliderPosition();
+                                    });
+
+                                    nextBtn.addEventListener('click', (e) => {
+                                        e.stopPropagation();
+                                        currentImageIndex = (currentImageIndex + 1) % imageCount;
+                                        updateSliderPosition();
+                                    });
+                                }
+                            } else if (post.image) { // Fallback for older posts with single image
+                                const image = document.createElement('img');
+                                image.src = post.image;
+                                image.alt = post.caption;
+                                image.className = 'account-image';
+                                image.addEventListener('click', () => {
+                                    openModal(post.image);
+                                });
+                                sliderTrack.appendChild(image);
+                            }
+
+                            const info = document.createElement('div');
+                            info.className = 'account-info';
+
+                            const caption = document.createElement('h3');
+                            caption.className = 'account-caption';
+                            caption.textContent = post.caption;
+
+                            const price = document.createElement('div');
+                            price.className = 'account-price';
+                            price.innerHTML = `<span class="price-label">Price:</span> ${post.price.toFixed(2)}`;
+                            
+                            const stats = document.createElement('div');
+                            stats.className = 'account-stats';
+                            stats.innerHTML = `
+                                <span class="stat like-btn" data-post-id="${post.id}"><i class="fas fa-heart"></i> <span class="like-count">${post.likes || 0}</span></span>
+                                <span class="stat comment-btn" data-post-id="${post.id}"><i class="fas fa-comment"></i> <span class="comment-count">${post.comments ? post.comments.length : 0}</span></span>
+                                <span class="stat"><i class="fas fa-share"></i> ${post.shares || 0}</span>
+                            `;
+
+                            const buyButton = document.createElement('a');
+                            buyButton.className = 'buy-btn';
+                            buyButton.textContent = 'Buy Now';
+                            buyButton.href = `https://wa.me/?text=I'm%20interested%20in%20the%20account:%20${encodeURIComponent(post.caption)}%20for%20${post.price.toFixed(2)}`;
+                            buyButton.target = '_blank';
+
+                            info.appendChild(caption);
+                            info.appendChild(price);
+                            info.appendChild(stats);
+
+                            const commentSection = document.createElement('div');
+                            commentSection.className = 'comment-section';
+
+                            const commentForm = document.createElement('form');
+                            commentForm.className = 'comment-form';
+                            commentForm.dataset.postId = post.id;
+                            commentForm.innerHTML = `
+                                <textarea placeholder="Add a comment..."></textarea>
+                                <button type="submit">Comment</button>
+                            `;
+
+                            const commentList = document.createElement('div');
+                            commentList.className = 'comment-list';
+
+                            commentSection.appendChild(commentForm);
+                            commentSection.appendChild(commentList);
+
+                            info.appendChild(commentSection);
+                            info.appendChild(buyButton);
+
+                            card.appendChild(slider);
+                            card.appendChild(info);
+
+                            const likeBtn = card.querySelector('.like-btn');
+                            const commentBtn = card.querySelector('.comment-btn');
+                            const postId = likeBtn.dataset.postId;
+
+                            commentBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                if (commentSection.style.display === 'none') {
+                                    commentSection.style.display = 'block';
+                                } else {
+                                    commentSection.style.display = 'none';
+                                }
+                            });
+
+                            if (likedPosts.includes(postId)) {
+                                likeBtn.style.pointerEvents = 'none';
+                                likeBtn.style.color = '#ff4757';
+                            }
+
+                            likeBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                if (likedPosts.includes(postId)) {
+                                    return;
+                                }
+
+                                fetch(`/api/posts/${postId}/like`, {
+                                    method: 'POST'
+                                })
+                                .then(response => response.json())
+                                .then(updatedPost => {
+                                    const likeCountElement = likeBtn.querySelector('.like-count');
+                                    likeCountElement.textContent = updatedPost.likes;
+                                    
+                                    likedPosts.push(postId);
+                                    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                                    
+                                    likeBtn.style.pointerEvents = 'none';
+                                    likeBtn.style.color = '#ff4757';
+                                })
+                                .catch(error => console.error('Error liking post:', error));
+                            });
+
+                            const fetchAndDisplayComments = () => {
+                                fetch(`/api/posts/${post.id}/comments`)
+                                    .then(response => response.json())
+                                    .then(comments => {
+                                        commentList.innerHTML = '';
+                                        comments.forEach(comment => {
+                                            const commentElement = document.createElement('div');
+                                            commentElement.className = 'comment';
+                                            commentElement.innerHTML = `
+                                                <p>${comment.text}</p>
+                                                <span class="meta">${new Date(comment.createdAt).toLocaleString()}</span>
+                                            `;
+                                            commentList.appendChild(commentElement);
+                                        });
+                                    });
+                            };
+
+                            commentForm.addEventListener('submit', (e) => {
+                                e.preventDefault();
+                                const textarea = e.target.querySelector('textarea');
+                                const text = textarea.value.trim();
+
+                                if (text) {
+                                    fetch(`/api/posts/${post.id}/comments`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ text })
+                                    })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                        textarea.value = '';
+                                        fetchAndDisplayComments();
+                                    });
+                                }
+                            });
+
+                            fetchAndDisplayComments();
+
+                            grid.appendChild(card);
+                        });
+
+                        accountsContainer.appendChild(grid);
+                    } else {
+                        const noAccounts = document.createElement('div');
+                        noAccounts.className = 'no-accounts';
+                        noAccounts.innerHTML = `
+                            <div class="no-accounts-icon">🎯</div>
+                            <h2>No accounts available yet</h2>
+                            <p>Check back soon for amazing Free Fire accounts!</p>
+                        `;
+                        accountsContainer.appendChild(noAccounts);
+                    }
+                })
+                .catch(error => {
+                    if(loader) {
+                        loader.remove();
+                    }
+                    console.error('Error fetching posts:', error);
+                    const errorElement = document.createElement('div');
+                    errorElement.className = 'no-accounts';
+                    errorElement.innerHTML = '<h2>Error loading accounts. Please try again later.</h2>';
+                    accountsContainer.appendChild(errorElement);
+                });
+        });
+    </script>
+</body>
+</html>

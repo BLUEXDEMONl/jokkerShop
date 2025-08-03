@@ -214,7 +214,7 @@
         }
 
         .price-input::before {
-            content: '$';
+            content: '#';
             position: absolute;
             left: 15px;
             top: 50%;
@@ -227,6 +227,34 @@
 
         .price-input .form-input {
             padding-left: 35px;
+        }
+
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #ff4757;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
@@ -285,7 +313,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price" class="form-label">💰 Price (USD)</label>
+                        <label for="price" class="form-label">💰 Price (NGN)</label>
                         <div class="price-input">
                             <input type="number" id="price" name="price" step="0.01" min="0" required class="form-input" placeholder="0.00">
                         </div>
@@ -298,6 +326,10 @@
         </div>
     </main>
 
+    <div class="loader-overlay" id="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
     <script>
         document.getElementById('upload-form').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -305,6 +337,9 @@
             const form = event.target;
             const formData = new FormData(form);
             const messageContainer = document.getElementById('message-container');
+            const loaderOverlay = document.getElementById('loader-overlay');
+
+            loaderOverlay.style.display = 'flex';
 
             try {
                 const response = await fetch(form.action, {
@@ -330,6 +365,8 @@
                 messageContainer.textContent = 'An unexpected error occurred. Please try again.';
                 messageContainer.className = 'message error';
                 messageContainer.style.display = 'block';
+            } finally {
+                loaderOverlay.style.display = 'none';
             }
         });
     </script>
