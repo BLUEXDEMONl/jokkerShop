@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1704067200000,
+    "image": "/uploads/sample-account.jpg",
+    "caption": "🔥 Elite Free Fire Account - Level 65 with Rare Skins! Features: DJ Alok character, Multiple gun skins, 50+ outfits, Rare emotes collection, High K/D ratio",
+    "price": 45.99,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 1704153600000,
+    "image": "/uploads/sample-account-2.jpg", 
+    "caption": "💎 Premium Account - Level 72 with Legendary Items! Includes: Chrono character, Diamond rank achieved, Exclusive weapon skins, Limited edition outfits",
+    "price": 89.99,
+    "createdAt": "2024-01-02T00:00:00.000Z"
+  }
+]
