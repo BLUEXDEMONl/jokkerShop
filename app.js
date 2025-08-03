@@ -103,17 +103,83 @@ function savePosts(posts) {
     }
 }
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+});
+
 app.get('/jokker', (req, res) => {
-res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    res.sendFile(path.join(__dirname, 'public', 'jokker.html'))
 });
 
 app.get('/admin', (req, res) => {
-res.sendFile(path.join(__dirname, 'public', 'admin.html'))
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'))
 });
 
 app.get('/api/posts', (req, res) => {
     const posts = getPosts();
     res.json(posts);
+});
+
+app.post('/api/posts/:id/like', (req, res) => {
+    const postId = parseInt(req.params.id, 10);
+    const posts = getPosts();
+    const postIndex = posts.findIndex(p => p.id === postId);
+
+    if (postIndex !== -1) {
+        posts[postIndex].likes = (posts[postIndex].likes || 0) + 1;
+        savePosts(posts);
+        res.json(posts[postIndex]);
+    } else {
+        res.status(404).json({
+            message: 'Post not found'
+        });
+    }
+});
+
+app.get('/api/posts/:id/comments', (req, res) => {
+    const postId = parseInt(req.params.id, 10);
+    const posts = getPosts();
+    const post = posts.find(p => p.id === postId);
+
+    if (post) {
+        res.json(post.comments || []);
+    } else {
+        res.status(404).json({
+            message: 'Post not found'
+        });
+    }
+});
+
+app.post('/api/posts/:id/comments', (req, res) => {
+    const postId = parseInt(req.params.id, 10);
+    const { text } = req.body;
+
+    if (!text) {
+        return res.status(400).json({ message: 'Comment text is required' });
+    }
+
+    const posts = getPosts();
+    const postIndex = posts.findIndex(p => p.id === postId);
+
+    if (postIndex !== -1) {
+        const newComment = {
+            id: Date.now(),
+            text: text,
+            createdAt: new Date().toISOString()
+        };
+
+        if (!posts[postIndex].comments) {
+            posts[postIndex].comments = [];
+        }
+
+        posts[postIndex].comments.push(newComment);
+        savePosts(posts);
+        res.status(201).json(newComment);
+    } else {
+        res.status(404).json({
+            message: 'Post not found'
+        });
+    }
 });
 
 app.post('/api/upload', upload.array('images', 10), async (req, res) => {
@@ -147,7 +213,10 @@ app.post('/api/upload', upload.array('images', 10), async (req, res) => {
             images: imageUrls,
             caption: caption.trim(),
             price: parseFloat(price),
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            likes: 0,
+            comments: 0,
+            shares: 0
         };
 
         const posts = getPosts();
