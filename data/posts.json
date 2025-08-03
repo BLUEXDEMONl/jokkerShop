@@ -1,23 +1,23 @@
 [
   {
-    "id": 1754230192523,
-    "image": "/uploads/account-1754230192355-911589817.jpg",
-    "caption": "Hhgug",
-    "price": 8,
-    "createdAt": "2025-08-03T14:09:52.523Z"
+    "id": 1754234281261,
+    "images": [
+      "https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/c07c2e66",
+      "https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/dd70eca8",
+      "https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/ea1f44b1"
+    ],
+    "caption": "Acc available, Gmail 1/1 logs",
+    "price": 10,
+    "createdAt": "2025-08-03T15:18:01.262Z"
   },
   {
-    "id": 1704067200000,
-    "image": "/uploads/sample-account.jpg",
-    "caption": "🔥 Elite Free Fire Account - Level 65 with Rare Skins! Features: DJ Alok character, Multiple gun skins, 50+ outfits, Rare emotes collection, High K/D ratio",
-    "price": 45.99,
-    "createdAt": "2024-01-01T00:00:00.000Z"
-  },
-  {
-    "id": 1704153600000,
-    "image": "/uploads/sample-account-2.jpg",
-    "caption": "💎 Premium Account - Level 72 with Legendary Items! Includes: Chrono character, Diamond rank achieved, Exclusive weapon skins, Limited edition outfits",
-    "price": 89.99,
-    "createdAt": "2024-01-02T00:00:00.000Z"
+    "id": 1754233788686,
+    "images": [
+      "https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/f05e8f3b",
+      "https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/b5989756"
+    ],
+    "caption": "new acc",
+    "price": 10,
+    "createdAt": "2025-08-03T15:09:48.686Z"
   }
 ]
