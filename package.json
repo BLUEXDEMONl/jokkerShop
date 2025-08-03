@@ -8,11 +8,16 @@
     "dev": "node app.js"
   },
   "dependencies": {
+    "@huggingface/hub": "^0.15.2",
+    "dotenv": "^16.6.1",
     "express": "^4.18.2",
-    "multer": "^1.4.5-lts.1",
-    "ejs": "^3.1.9"
+    "multer": "^1.4.5-lts.1"
   },
-  "keywords": ["freefire", "accounts", "marketplace"],
+  "keywords": [
+    "freefire",
+    "accounts",
+    "marketplace"
+  ],
   "author": "JokkerShop",
   "license": "MIT"
 }
