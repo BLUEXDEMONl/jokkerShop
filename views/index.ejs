@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff4757 0%, #ffa502 50%, #ff6348 100%);
             min-height: 100vh;
             color: #333;
         }
@@ -43,24 +43,35 @@
         .logo {
             font-size: 28px;
             font-weight: bold;
-            color: #667eea;
+            color: #ff4757;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff4757;
         }
 
         .admin-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #ff4757, #ffa502);
             color: white;
             padding: 12px 24px;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
         }
 
         .admin-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
         }
 
         .main-content {
@@ -129,7 +140,7 @@
         .account-price {
             font-size: 24px;
             font-weight: bold;
-            color: #667eea;
+            color: #ff4757;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -191,7 +202,10 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="/" class="logo">🎮 JokkerShop Nx</a>
+                <a href="/" class="logo">
+                    <img src="https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/IMG-20250803-WA0010.jpg" alt="JokkerShop Nx" class="logo-img">
+                    JokkerShop Nx
+                </a>
                 <a href="/admin" class="admin-btn">Admin Panel</a>
             </div>
         </div>
