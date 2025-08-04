@@ -3,53 +3,16 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const crypto = require('crypto');
 const {
-    uploadFile
-} = require("@huggingface/hub");
+    ErrorHandler,
+    uploadToHuggingFace,
+    getPosts,
+    savePosts,
+    generatePostId
+} = require('./func');
 
 const app = express();
 const PORT = 7860;
-
-const repo = "api-ix/IMAGES";
-const HUG_KEY = process.env.HUG_KEY;
-
-class ErrorHandler extends Error {
-    constructor(statusCode, message) {
-        super();
-        this.statusCode = statusCode;
-        this.message = message;
-    }
-}
-
-async function uploadToHuggingFace(filePath) {
-    if (!fs.existsSync(filePath)) {
-        throw new ErrorHandler(404, `❌ Error: File not found at '${filePath}'`);
-    }
-
-    const originalFilename = path.basename(filePath);
-    const randomName =
-        crypto.randomBytes(4).toString("hex") + path.extname(originalFilename);
-    const fileContent = fs.readFileSync(filePath);
-    const file = new File([fileContent], randomName);
-
-    try {
-        await uploadFile({
-            repo: {
-                name: repo,
-                type: "space"
-            },
-            file: file,
-            path: randomName,
-            credentials: {
-                accessToken: HUG_KEY,
-            },
-        });
-        return `https://huggingface.co/spaces/${repo}/resolve/main/${randomName}`;
-    } catch (err) {
-        throw new ErrorHandler(500, `❌ Upload failed: ${err.message}`);
-    }
-}
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -74,34 +37,6 @@ const upload = multer({
         fileSize: 5 * 1024 * 1024
     }
 });
-
-const dataFile = path.join(__dirname, 'data', 'posts.json');
-
-function getPosts() {
-    try {
-        if (fs.existsSync(dataFile)) {
-            const data = fs.readFileSync(dataFile, 'utf8');
-            return JSON.parse(data);
-        }
-    } catch (error) {
-        console.log('No existing posts file found or error reading, starting with empty array');
-    }
-    return [];
-}
-
-function savePosts(posts) {
-    try {
-        const dataDir = path.dirname(dataFile);
-        if (!fs.existsSync(dataDir)) {
-            fs.mkdirSync(dataDir, {
-                recursive: true
-            });
-        }
-        fs.writeFileSync(dataFile, JSON.stringify(posts, null, 2));
-    } catch (error) {
-        console.error('Error saving posts:', error);
-    }
-}
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
@@ -163,7 +98,7 @@ app.post('/api/posts/:id/comments', (req, res) => {
 
     if (postIndex !== -1) {
         const newComment = {
-            id: Date.now(),
+            id: generatePostId(),
             text: text,
             createdAt: new Date().toISOString()
         };
@@ -209,7 +144,7 @@ app.post('/api/upload', upload.array('images', 10), async (req, res) => {
         }
 
         const newPost = {
-            id: Date.now(),
+            id: generatePostId(),
             images: imageUrls,
             caption: caption.trim(),
             price: parseFloat(price),
