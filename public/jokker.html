@@ -35,13 +35,11 @@
         }
 
         .header .container {
-            margin: 0;
-        }
-
-        .header-content {
+            margin: 0 auto;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -60,6 +58,34 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #ff4757;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .main-nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #ff4757;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            z-index: 1001;
         }
 
         .main-content {
@@ -98,8 +124,8 @@
         }
 
         .account-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 71, 87, 0.5);
         }
 
         .account-image-slider {
@@ -200,8 +226,11 @@
         }
 
         .buy-btn {
-            display: block;
-            background-color: #28a745;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #25D366;
             color: white;
             text-align: center;
             padding: 12px;
@@ -213,7 +242,7 @@
         }
 
         .buy-btn:hover {
-            background-color: #218838;
+            background-color: #128C7E;
         }
 
         .comment-section {
@@ -276,19 +305,44 @@
             opacity: 0.7;
         }
 
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 8px solid #ff4757;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 50px auto;
+        .skeleton-card {
+            background: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .skeleton-image {
+            width: 100%;
+            height: 200px;
+            background: #e0e0e0;
+        }
+
+        .skeleton-info {
+            padding: 25px;
+        }
+
+        .skeleton-text {
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-text.title {
+            width: 80%;
+            height: 20px;
+        }
+
+        .skeleton-text.price {
+            width: 40%;
+            height: 24px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-text.button {
+            width: 100%;
+            height: 45px;
+            border-radius: 10px;
         }
 
         .footer {
@@ -341,9 +395,66 @@
         }
 
         @media (max-width: 768px) {
-            .header-content {
+            .main-nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.9);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
-                gap: 15px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+            }
+
+            .main-nav.active {
+                max-height: 100vh;
+                padding: 20px 0;
+                border-top: 1px solid rgba(0,0,0,0.1);
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .main-nav a {
+                font-size: 20px;
+                padding: 15px 30px;
+                display: block;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .main-nav a:hover {
+                background-color: #ff4757;
+                color: white;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle .fa-bars, .menu-toggle .fa-times {
+                transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            }
+
+            .menu-toggle .fa-times {
+                display: none;
+            }
+
+            .menu-toggle.active .fa-bars {
+                transform: rotate(90deg);
+                opacity: 0;
+                display: none;
+            }
+
+            .menu-toggle.active .fa-times {
+                transform: rotate(0deg);
+                opacity: 1;
+                display: block;
             }
 
             .page-title {
@@ -364,12 +475,21 @@
 <body>
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <img src="https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/IMG-20250803-WA0010.jpg" alt="JokkerShop Nx" class="logo-img">
-                    JokkerShop Nx
-                </a>
-            </div>
+            <a href="#" class="logo">
+                <img src="https://huggingface.co/spaces/api-ix/IMAGES/resolve/main/IMG-20250803-WA0010.jpg" alt="JokkerShop Nx" class="logo-img">
+                JokkerShop Nx
+            </a>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="/jokker">Home</a></li>
+                    <li><a href="/admin">Admin Panel</a></li>
+                    <li><a href="https://chat.whatsapp.com/Kt9Axe8PVL8GGK1YkH5Y8j?mode=ac_t">WhatsApp Group</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </header>
 
@@ -378,8 +498,8 @@
             <h1 class="page-title">Premium Free Fire Accounts</h1>
             <p class="page-subtitle">Discover amazing Free Fire accounts with exclusive skins and items</p>
 
-            <div id="accounts-container">
-                <div class="loader"></div>
+            <div id="accounts-container" class="accounts-grid">
+                
             </div>
         </div>
     </main>
@@ -387,7 +507,7 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 JokkerShop Nx. Premium Free Fire Accounts Marketplace.</p>
-            <p><a href="https.chat.whatsapp.com/Kt9Axe8PVL8GGK1YkH5Y8j?mode=ac_t" style="color: green; text-decoration: none;">Join our WhatsApp Group</a></p>
+            <p><a href="https://chat.whatsapp.com/Kt9Axe8PVL8GGK1YkH5Y8j?mode=ac_t" style="color: #25D366; text-decoration: none;">Join our WhatsApp Group</a></p>
         </div>
     </footer>
 
@@ -402,7 +522,13 @@
             const modal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const closeBtn = document.querySelector('.close-btn');
-            const loader = document.querySelector('.loader');
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                mainNav.classList.toggle('active');
+            });
 
             const openModal = (src) => {
                 modal.style.display = 'block';
@@ -420,19 +546,32 @@
                 }
             });
 
+            const showSkeletonLoader = () => {
+                accountsContainer.innerHTML = '';
+                for (let i = 0; i < 6; i++) {
+                    const skeletonCard = document.createElement('div');
+                    skeletonCard.className = 'skeleton-card';
+                    skeletonCard.innerHTML = `
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-info">
+                            <div class="skeleton-text title"></div>
+                            <div class="skeleton-text price"></div>
+                            <div class="skeleton-text button"></div>
+                        </div>
+                    `;
+                    accountsContainer.appendChild(skeletonCard);
+                }
+            };
+
             const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+
+            showSkeletonLoader();
 
             fetch('/api/posts')
                 .then(response => response.json())
                 .then(posts => {
-                    if(loader) {
-                        loader.remove();
-                    }
-                    console.log(posts);
+                    accountsContainer.innerHTML = '';
                     if (posts && posts.length > 0) {
-                        const grid = document.createElement('div');
-                        grid.className = 'accounts-grid';
-
                         posts.forEach(post => {
                             const card = document.createElement('div');
                             card.className = 'account-card';
@@ -450,6 +589,7 @@
                                     image.src = imageUrl;
                                     image.alt = post.caption;
                                     image.className = 'account-image';
+                                    image.loading = 'lazy';
                                     image.addEventListener('click', () => {
                                         openModal(imageUrl);
                                     });
@@ -491,6 +631,7 @@
                                 image.src = post.image;
                                 image.alt = post.caption;
                                 image.className = 'account-image';
+                                image.loading = 'lazy';
                                 image.addEventListener('click', () => {
                                     openModal(post.image);
                                 });
@@ -506,7 +647,7 @@
 
                             const price = document.createElement('div');
                             price.className = 'account-price';
-                            price.innerHTML = `<span class="price-label">Price:</span> ${post.price.toFixed(2)}`;
+                            price.innerHTML = `<span class="price-label">Price:</span> #${post.price.toFixed(2)}`;
                             
                             const stats = document.createElement('div');
                             stats.className = 'account-stats';
@@ -518,7 +659,7 @@
 
                             const buyButton = document.createElement('a');
                             buyButton.className = 'buy-btn';
-                            buyButton.textContent = 'Buy Now';
+                            buyButton.innerHTML = '<i class="fab fa-whatsapp"></i> Buy Now';
                             buyButton.href = `https://wa.me/?text=I'm%20interested%20in%20the%20account:%20${encodeURIComponent(post.caption)}%20for%20${post.price.toFixed(2)}`;
                             buyButton.target = '_blank';
 
@@ -553,10 +694,39 @@
                             const commentBtn = card.querySelector('.comment-btn');
                             const postId = likeBtn.dataset.postId;
 
+                            const fetchAndDisplayComments = async () => {
+                                commentList.innerHTML = '<p>Loading comments...</p>';
+                                try {
+                                    const response = await fetch(`/api/posts/${post.id}/comments`);
+                                    const comments = await response.json();
+                                    
+                                    commentList.innerHTML = '';
+                                    if (comments && comments.length > 0) {
+                                        comments.forEach(comment => {
+                                            const commentElement = document.createElement('div');
+                                            commentElement.className = 'comment';
+                                            commentElement.innerHTML = `
+                                                <p>${comment.text}</p>
+                                                <span class="meta">${new Date(comment.createdAt).toLocaleString()}</span>
+                                            `;
+                                            commentList.appendChild(commentElement);
+                                        });
+                                    } else {
+                                        commentList.innerHTML = '<p>No comments yet.</p>';
+                                    }
+                                } catch (error) {
+                                    console.error('Error fetching comments:', error);
+                                    commentList.innerHTML = '<p>Could not load comments.</p>';
+                                }
+                            };
+
                             commentBtn.addEventListener('click', (e) => {
                                 e.stopPropagation();
-                                if (commentSection.style.display === 'none') {
+                                const isHidden = commentSection.style.display === 'none' || commentSection.style.display === '';
+                                
+                                if (isHidden) {
                                     commentSection.style.display = 'block';
+                                    fetchAndDisplayComments();
                                 } else {
                                     commentSection.style.display = 'none';
                                 }
@@ -590,50 +760,30 @@
                                 .catch(error => console.error('Error liking post:', error));
                             });
 
-                            const fetchAndDisplayComments = () => {
-                                fetch(`/api/posts/${post.id}/comments`)
-                                    .then(response => response.json())
-                                    .then(comments => {
-                                        commentList.innerHTML = '';
-                                        comments.forEach(comment => {
-                                            const commentElement = document.createElement('div');
-                                            commentElement.className = 'comment';
-                                            commentElement.innerHTML = `
-                                                <p>${comment.text}</p>
-                                                <span class="meta">${new Date(comment.createdAt).toLocaleString()}</span>
-                                            `;
-                                            commentList.appendChild(commentElement);
-                                        });
-                                    });
-                            };
-
-                            commentForm.addEventListener('submit', (e) => {
+                            commentForm.addEventListener('submit', async (e) => {
                                 e.preventDefault();
                                 const textarea = e.target.querySelector('textarea');
                                 const text = textarea.value.trim();
 
                                 if (text) {
-                                    fetch(`/api/posts/${post.id}/comments`, {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({ text })
-                                    })
-                                    .then(response => response.json())
-                                    .then(() => {
+                                    try {
+                                        await fetch(`/api/posts/${post.id}/comments`, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ text })
+                                        });
                                         textarea.value = '';
                                         fetchAndDisplayComments();
-                                    });
+                                    } catch (error) {
+                                        console.error('Error posting comment:', error);
+                                    }
                                 }
                             });
 
-                            fetchAndDisplayComments();
-
-                            grid.appendChild(card);
+                            accountsContainer.appendChild(card);
                         });
-
-                        accountsContainer.appendChild(grid);
                     } else {
                         const noAccounts = document.createElement('div');
                         noAccounts.className = 'no-accounts';
@@ -646,9 +796,7 @@
                     }
                 })
                 .catch(error => {
-                    if(loader) {
-                        loader.remove();
-                    }
+                    accountsContainer.innerHTML = '';
                     console.error('Error fetching posts:', error);
                     const errorElement = document.createElement('div');
                     errorElement.className = 'no-accounts';
